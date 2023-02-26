@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newland.mall.system.mapper.SysUserMapper">
+    <resultMap id="BaseResultMap" type="com.newland.mall.system.entity.SysUser">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="dept_id" jdbcType="BIGINT" property="deptId"/>
+        <result column="job_id" jdbcType="BIGINT" property="jobId"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
+        <result column="gender" jdbcType="INTEGER" property="gender"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="can_deleted" jdbcType="INTEGER" property="canDeleted"/>
+        <result column="enabled" jdbcType="INTEGER" property="enabled"/>
+        <result column="must_reset_pwd" jdbcType="INTEGER" property="mustResetPwd"/>
+        <result column="pwd_fails_count" jdbcType="INTEGER" property="pwdFailsCount"/>
+        <result column="fail_lock_time" jdbcType="TIMESTAMP" property="failLockTime"/>
+        <result column="pwd_reset_time" jdbcType="TIMESTAMP" property="pwdResetTime"/>
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime"/>
+        <result column="created_by" jdbcType="BIGINT" property="createdBy"/>
+        <result column="updated_by" jdbcType="BIGINT" property="updatedBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, dept_id, job_id, username, real_name, nick_name, gender, phone, email, avatar,
+        password, can_deleted, enabled, must_reset_pwd, pwd_fails_count, fail_lock_time,
+        pwd_reset_time, last_login_time, created_by, updated_by, create_time, update_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from sys_user
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.newland.mall.system.entity.SysUser" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_user (id, dept_id, job_id,
+        username, real_name, nick_name,
+        gender, phone, email, avatar,
+        password, can_deleted, enabled,
+        must_reset_pwd, pwd_fails_count, fail_lock_time,
+        pwd_reset_time, last_login_time, created_by,
+        updated_by, create_time, update_time )
+        values (#{id,jdbcType=BIGINT}, #{deptId,jdbcType=BIGINT}, #{jobId,jdbcType=BIGINT},
+        #{username,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR},
+        #{gender,jdbcType=BIT}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR},
+        #{password,jdbcType=VARCHAR}, #{canDeleted,jdbcType=BIT}, #{enabled,jdbcType=BIT},
+        #{mustResetPwd,jdbcType=BIT}, #{pwdFailsCount,jdbcType=INTEGER}, #{failLockTime,jdbcType=TIMESTAMP},
+        #{pwdResetTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{createdBy,jdbcType=BIGINT},
+        #{updatedBy,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.newland.mall.system.entity.SysUser" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="jobId != null">job_id,</if>
+            <if test="username != null">username,</if>
+            <if test="realName != null">real_name,</if>
+            <if test="nickName != null">nick_name,</if>
+            <if test="gender != null">gender,</if>
+            <if test="phone != null">phone,</if>
+            <if test="email != null">email,</if>
+            <if test="avatar != null">avatar,</if>
+            <if test="password != null">password,</if>
+            <if test="canDeleted != null">can_deleted,</if>
+            <if test="enabled != null">enabled,</if>
+            <if test="mustResetPwd != null">must_reset_pwd,</if>
+            <if test="pwdFailsCount != null">pwd_fails_count,</if>
+            <if test="failLockTime != null">fail_lock_time,</if>
+            <if test="pwdResetTime != null">pwd_reset_time,</if>
+            <if test="lastLoginTime != null">last_login_time,</if>
+            <if test="createdBy != null">created_by,</if>
+            <if test="updatedBy != null">updated_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id,jdbcType=BIGINT},</if>
+            <if test="deptId != null">#{deptId,jdbcType=BIGINT},</if>
+            <if test="jobId != null">#{jobId,jdbcType=BIGINT},</if>
+            <if test="username != null">#{username,jdbcType=VARCHAR},</if>
+            <if test="realName != null">#{realName,jdbcType=VARCHAR},</if>
+            <if test="nickName != null">#{nickName,jdbcType=VARCHAR},</if>
+            <if test="gender != null">#{gender,jdbcType=BIT},</if>
+            <if test="phone != null">#{phone,jdbcType=VARCHAR},</if>
+            <if test="email != null">#{email,jdbcType=VARCHAR},</if>
+            <if test="avatar != null">#{avatar,jdbcType=VARCHAR},</if>
+            <if test="password != null">#{password,jdbcType=VARCHAR},</if>
+            <if test="canDeleted != null">#{canDeleted,jdbcType=BIT},</if>
+            <if test="enabled != null">#{enabled,jdbcType=BIT},</if>
+            <if test="mustResetPwd != null">#{mustResetPwd,jdbcType=BIT},</if>
+            <if test="pwdFailsCount != null">#{pwdFailsCount,jdbcType=INTEGER},</if>
+            <if test="failLockTime != null">#{failLockTime,jdbcType=TIMESTAMP},</if>
+            <if test="pwdResetTime != null">#{pwdResetTime,jdbcType=TIMESTAMP},</if>
+            <if test="lastLoginTime != null">#{lastLoginTime,jdbcType=TIMESTAMP},</if>
+            <if test="createdBy != null">#{createdBy,jdbcType=BIGINT},</if>
+            <if test="updatedBy != null">#{updatedBy,jdbcType=BIGINT},</if>
+            <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+            <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.newland.mall.system.entity.SysUser">
+        update sys_user
+        <set>
+            <if test="deptId != null">
+                dept_id = #{deptId,jdbcType=BIGINT},
+            </if>
+            <if test="jobId != null">
+                job_id = #{jobId,jdbcType=BIGINT},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null">
+                real_name = #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                nick_name = #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                gender = #{gender,jdbcType=BIT},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="avatar != null">
+                avatar = #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="canDeleted != null">
+                can_deleted = #{canDeleted,jdbcType=BIT},
+            </if>
+            <if test="enabled != null">
+                enabled = #{enabled,jdbcType=BIT},
+            </if>
+            <if test="mustResetPwd != null">
+                must_reset_pwd = #{mustResetPwd,jdbcType=BIT},
+            </if>
+            <if test="pwdFailsCount != null">
+                pwd_fails_count = #{pwdFailsCount,jdbcType=INTEGER},
+            </if>
+            <if test="failLockTime != null">
+                fail_lock_time = #{failLockTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="pwdResetTime != null">
+                pwd_reset_time = #{pwdResetTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastLoginTime != null">
+                last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createdBy != null">
+                created_by = #{createdBy,jdbcType=BIGINT},
+            </if>
+            <if test="updatedBy != null">
+                updated_by = #{updatedBy,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.newland.mall.system.entity.SysUser">
+        update sys_user
+        set dept_id = #{deptId,jdbcType=BIGINT},
+        job_id = #{jobId,jdbcType=BIGINT},
+        username = #{username,jdbcType=VARCHAR},
+        real_name = #{realName,jdbcType=VARCHAR},
+        nick_name = #{nickName,jdbcType=VARCHAR},
+        gender = #{gender,jdbcType=BIT},
+        phone = #{phone,jdbcType=VARCHAR},
+        email = #{email,jdbcType=VARCHAR},
+        avatar = #{avatar,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
+        can_deleted = #{canDeleted,jdbcType=BIT},
+        enabled = #{enabled,jdbcType=BIT},
+        must_reset_pwd = #{mustResetPwd,jdbcType=BIT},
+        pwd_fails_count = #{pwdFailsCount,jdbcType=INTEGER},
+        fail_lock_time = #{failLockTime,jdbcType=TIMESTAMP},
+        pwd_reset_time = #{pwdResetTime,jdbcType=TIMESTAMP},
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+        created_by = #{createdBy,jdbcType=BIGINT},
+        updated_by = #{updatedBy,jdbcType=BIGINT},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectUsersPage" resultType="com.newland.mall.system.model.vo.SysUserVo">
+        select
+        t1.id,t1.create_time,t1.update_time,t1.username,t1.nick_name,t1.gender,t1.phone,t1.email,t1.avatar,t1.can_deleted,
+        t1.enabled,t1.fail_lock_time,t1.pwd_reset_time,t1.last_login_time,
+        t2.name as deptName
+        from sys_user t1 left join sys_department t2 on t1.dept_id = t2.id
+        <where>
+            <if test="dto.enabled!=null">and t1.enabled = #{dto.enabled}</if>
+            <if test="dto.blurry != null and dto.blurry != ''">
+                AND (
+                t1.username like CONCAT('%', #{dto.blurry}, '%')
+                OR t1.nick_name like CONCAT('%', #{dto.blurry}, '%')
+                OR t1.phone like CONCAT('%', #{dto.blurry}, '%')
+                OR t1.email like CONCAT('%', #{dto.blurry}, '%')
+                )
+            </if>
+            <if test="dto.deptIds!=null and dto.deptIds.size()>0">
+                and t2.id in
+                <foreach collection="dto.deptIds" item="deptId" open="(" close=")" separator=",">#{deptId}</foreach>
+            </if>
+            <if test="dto.createTime!=null and dto.createTime.size==2">
+                and t1.create_time>=#{dto.createTime[0]} and t1.create_time <![CDATA[<=]]> #{dto.createTime[1]}
+            </if>
+        </where>
+    </select>
+    <select id="selectByUsername" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        where username = #{username}
+    </select>
+    <select id="selectByPhone" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        where phone = #{phone}
+    </select>
+    <select id="selectByEmail" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        where email = #{email}
+    </select>
+    <delete id="deleteByUserIds">
+        delete from sys_user where can_deleted = 1 and id in
+        <foreach collection="userIds" item="id" open="(" close=")" separator=",">#{id}</foreach>
+    </delete>
+</mapper>

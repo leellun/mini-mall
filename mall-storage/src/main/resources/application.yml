@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: mall-storage
+  profiles:
+    active: dev

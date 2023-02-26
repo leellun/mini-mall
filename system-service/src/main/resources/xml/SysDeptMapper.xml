@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newland.mall.system.mapper.SysDeptMapper">
+    <resultMap id="BaseResultMap" type="com.newland.mall.system.entity.SysDept">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="pid" jdbcType="BIGINT" property="pid"/>
+        <result column="sub_count" jdbcType="INTEGER" property="subCount"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="dept_sort" jdbcType="INTEGER" property="deptSort"/>
+        <result column="enabled" jdbcType="INTEGER" property="enabled"/>
+        <result column="created_by" jdbcType="BIGINT" property="createdBy"/>
+        <result column="updated_by" jdbcType="BIGINT" property="updatedBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, pid, sub_count, name, dept_sort, enabled, created_by, updated_by, create_time,update_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_dept
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from sys_dept
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.newland.mall.system.entity.SysDept" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_dept (id, pid, sub_count,
+        name, dept_sort, enabled,
+        created_by, updated_by, create_time,
+        update_time)
+        values (#{id,jdbcType=BIGINT}, #{pid,jdbcType=BIGINT}, #{subCount,jdbcType=INTEGER},
+        #{name,jdbcType=VARCHAR}, #{deptSort,jdbcType=INTEGER}, #{enabled,jdbcType=BIT},
+        #{createdBy,jdbcType=BIGINT}, #{updatedBy,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.newland.mall.system.entity.SysDept" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_dept
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="subCount != null">
+                sub_count,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="deptSort != null">
+                dept_sort,
+            </if>
+            <if test="enabled != null">
+                enabled,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="updatedBy != null">
+                updated_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=BIGINT},
+            </if>
+            <if test="subCount != null">
+                #{subCount,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="deptSort != null">
+                #{deptSort,jdbcType=INTEGER},
+            </if>
+            <if test="enabled != null">
+                #{enabled,jdbcType=BIT},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy,jdbcType=BIGINT},
+            </if>
+            <if test="updatedBy != null">
+                #{updatedBy,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.newland.mall.system.entity.SysDept">
+        update sys_dept
+        <set>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=BIGINT},
+            </if>
+            <if test="subCount != null">
+                sub_count = #{subCount,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="deptSort != null">
+                dept_sort = #{deptSort,jdbcType=INTEGER},
+            </if>
+            <if test="enabled != null">
+                enabled = #{enabled,jdbcType=BIT},
+            </if>
+            <if test="createdBy != null">
+                created_by = #{createdBy,jdbcType=BIGINT},
+            </if>
+            <if test="updatedBy != null">
+                updated_by = #{updatedBy,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.newland.mall.system.entity.SysDept">
+        update sys_dept
+        set pid = #{pid,jdbcType=BIGINT},
+        sub_count = #{subCount,jdbcType=INTEGER},
+        name = #{name,jdbcType=VARCHAR},
+        dept_sort = #{deptSort,jdbcType=INTEGER},
+        enabled = #{enabled,jdbcType=BIT},
+        created_by = #{createdBy,jdbcType=BIGINT},
+        updated_by = #{updatedBy,jdbcType=BIGINT},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="selectDepartments" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_dept
+        <where>
+            <if test="root">
+                pid is null
+            </if>
+            <if test="dto.name!=null and dto.name!=''">and name like #{dto.name}</if>
+            <if test="dto.enabled!=null">and enabled = #{dto.enabled}</if>
+        </where>
+        order by dept_sort asc
+    </select>
+    <select id="selectDepartmentByNameAndPid" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_dept
+        <where>
+            name = #{name} and
+            <choose>
+                <when test="pid!=null">
+                    pid = #{pid}
+                </when>
+                <otherwise>
+                    pid is null
+                </otherwise>
+            </choose>
+        </where>
+        limit 1
+    </select>
+    <delete id="deleteBatchIds">
+        delete from sys_dept where id in
+        <foreach collection="ids" separator="," open="(" close=")" item="id">#{id}</foreach>
+    </delete>
+    <select id="selectDepartmentsByPid" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_dept
+        <where>
+            enabled = #{enabled} and
+            <choose>
+                <when test="pid!=null and pid !=0">
+                    pid = #{pid}
+                </when>
+                <otherwise>
+                    pid is null
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+    <select id="countDeptByPid" resultType="java.lang.Integer">
+        select count(1) from sys_dept where pid=#{pid}
+    </select>
+</mapper>

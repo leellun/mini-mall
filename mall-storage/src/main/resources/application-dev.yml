@@ -1,0 +1,36 @@
+server:
+  port: 9003
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.100.100:31065
+        namespace: e5dfe71c-4579-4e22-bc7a-ac2e5ffab032
+      config:
+        import-check:
+          enabled: false
+        enabled: false
+    sentinel:
+      transport:
+        dashboard: 192.168.100.100:32329
+  config:
+    activate:
+      on-profile: dev
+  data:
+    redis:
+      host: 192.168.100.100
+      port: 31351
+      password: liulun666
+
+minio:
+  url: http://192.168.100.100:31582
+  accessKey: jGtLBvw6HhnW9Nsc
+  secretKey: BzDmbL3ZCPERFHPxB5jOnf0w7l48DqOu
+  bucketName: test
+swagger:
+  concat:
+    name: 在线文档
+  base-package: com.newland.mall.system
+  title: 系统服务-在线文档
+  description: api文档
+  enable: true

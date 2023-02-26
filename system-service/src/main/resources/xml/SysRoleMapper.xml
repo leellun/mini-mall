@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newland.mall.system.mapper.SysRoleMapper">
+    <resultMap id="BaseResultMap" type="com.newland.mall.system.entity.SysRole">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="level" jdbcType="INTEGER" property="level"/>
+        <result column="enabled" jdbcType="INTEGER" property="enabled"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="created_by" jdbcType="BIGINT" property="createdBy"/>
+        <result column="updated_by" jdbcType="BIGINT" property="updatedBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, name, code, level, enabled, description, created_by, updated_by, create_time,
+        update_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_role
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from sys_role
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.newland.mall.system.entity.SysRole" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_role (id, name, code,
+        level, enabled, description,
+        created_by, updated_by, create_time,
+        update_time)
+        values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR},
+        #{level,jdbcType=INTEGER}, #{enabled,jdbcType=BIT}, #{description,jdbcType=VARCHAR},
+        #{createdBy,jdbcType=BIGINT}, #{updatedBy,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.newland.mall.system.entity.SysRole" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="level != null">
+                level,
+            </if>
+            <if test="enabled != null">
+                enabled,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="updatedBy != null">
+                updated_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="level != null">
+                #{level,jdbcType=INTEGER},
+            </if>
+            <if test="enabled != null">
+                #{enabled,jdbcType=BIT},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy,jdbcType=BIGINT},
+            </if>
+            <if test="updatedBy != null">
+                #{updatedBy,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.newland.mall.system.entity.SysRole">
+        update sys_role
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="level != null">
+                level = #{level,jdbcType=INTEGER},
+            </if>
+            <if test="enabled != null">
+                enabled = #{enabled,jdbcType=BIT},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="createdBy != null">
+                created_by = #{createdBy,jdbcType=BIGINT},
+            </if>
+            <if test="updatedBy != null">
+                updated_by = #{updatedBy,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.newland.mall.system.entity.SysRole">
+        update sys_role
+        set name = #{name,jdbcType=VARCHAR},
+        code = #{code,jdbcType=VARCHAR},
+        level = #{level,jdbcType=INTEGER},
+        enabled = #{enabled,jdbcType=BIT},
+        description = #{description,jdbcType=VARCHAR},
+        created_by = #{createdBy,jdbcType=BIGINT},
+        updated_by = #{updatedBy,jdbcType=BIGINT},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="getRoleWithIdByUserId" resultMap="BaseResultMap">
+        select t1.* from sys_role t1 left join sys_user_role t2 on t1.id = t2.role_id where t2.user_id=#{userId}
+        <if test="enabled!=null">and t1.enabled=#{enabled}</if>
+    </select>
+
+    <delete id="deleteBatchIds">
+        delete from sys_role where id in
+        <foreach collection="ids" separator="," open="(" close=")" item="id">#{id}</foreach>
+    </delete>
+    <select id="getRoleByNameAndEnabled" resultMap="BaseResultMap">
+        select * from sys_role
+        <where>
+            <if test="name!=null">
+                <bind name="namePattern" value="'%' + _parameter.name + '%'"/>
+                name like #{namePattern}
+            </if>
+            <if test="enabled!=null">and enabled = #{enabled}</if>
+        </where>
+    </select>
+    <select id="getRoleByName" resultMap="BaseResultMap">
+        select * from sys_role where name = #{name}
+    </select>
+    <select id="getRoleByCode" resultMap="BaseResultMap">
+        select * from sys_role where code = #{code}
+    </select>
+    <select id="selectByIds" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_role
+        where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">#{id}</foreach>
+    </select>
+</mapper>

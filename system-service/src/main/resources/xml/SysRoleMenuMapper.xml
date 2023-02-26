@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newland.mall.system.mapper.SysRoleMenuMapper">
+    <resultMap id="BaseResultMap" type="com.newland.mall.system.entity.SysRoleMenu">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="menu_id" jdbcType="BIGINT" property="menuId"/>
+        <result column="role_id" jdbcType="BIGINT" property="roleId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, menu_id, role_id
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_role_menu
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from sys_role_menu
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.newland.mall.system.entity.SysRoleMenu" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_role_menu (id, menu_id, role_id ) values (#{id,jdbcType=BIGINT}, #{menuId,jdbcType=BIGINT},
+        #{roleId,jdbcType=BIGINT} )
+    </insert>
+    <insert id="insertBatch">
+        insert into sys_role_menu (id, menu_id, role_id ) values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id,jdbcType=BIGINT}, #{item.menuId,jdbcType=BIGINT}, #{item.roleId,jdbcType=BIGINT} )
+        </foreach>
+    </insert>
+    <insert id="insertSelective" parameterType="com.newland.mall.system.entity.SysRoleMenu" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_role_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="menuId != null">
+                menu_id,
+            </if>
+            <if test="roleId != null">
+                role_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="menuId != null">
+                #{menuId,jdbcType=BIGINT},
+            </if>
+            <if test="roleId != null">
+                #{roleId,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.newland.mall.system.entity.SysRoleMenu">
+        update sys_role_menu
+        <set>
+            <if test="menuId != null">
+                menu_id = #{menuId,jdbcType=BIGINT},
+            </if>
+            <if test="roleId != null">
+                role_id = #{roleId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.newland.mall.system.entity.SysRoleMenu">
+        update sys_role_menu
+        set menu_id = #{menuId,jdbcType=BIGINT},
+        role_id = #{roleId,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="getMenuIdsByRoleId" resultType="java.lang.Long">
+        select menu_id from sys_role_menu where role_id = #{roleId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByRoleAndMenus">
+        delete from sys_role_menu where role_id=#{roleId} and menu_id in
+        <foreach collection="menuIds" item="menuId" open="(" separator="," close=")">
+            #{menuId}
+        </foreach>
+    </delete>
+</mapper>

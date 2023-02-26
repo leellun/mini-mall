@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newland.mall.system.mapper.SysMenuMapper">
+    <resultMap id="BaseResultMap" type="com.newland.mall.system.entity.SysMenu">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="pid" jdbcType="BIGINT" property="pid"/>
+        <result column="sub_count" jdbcType="INTEGER" property="subCount"/>
+        <result column="type" jdbcType="TINYINT" property="type"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="component" jdbcType="VARCHAR" property="component"/>
+        <result column="menu_sort" jdbcType="INTEGER" property="menuSort"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="path" jdbcType="VARCHAR" property="path"/>
+        <result column="target" jdbcType="INTEGER" property="target"/>
+        <result column="enabled" jdbcType="INTEGER" property="enabled"/>
+        <result column="keep_alive" jdbcType="BIT" property="keepAlive"/>
+        <result column="hidden" jdbcType="INTEGER" property="hidden"/>
+        <result column="permission" jdbcType="VARCHAR" property="permission"/>
+        <result column="created_by" jdbcType="BIGINT" property="createdBy"/>
+        <result column="updated_by" jdbcType="BIGINT" property="updatedBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, pid, sub_count, type, title, name, component, menu_sort, icon, path, target,
+        enabled, keep_alive, hidden, permission, created_by, updated_by, create_time, update_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_menu
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from sys_menu
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.newland.mall.system.entity.SysMenu" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_menu (id, pid, sub_count,
+        type, title, name,
+        component, menu_sort, icon,
+        path, target, enabled, keep_alive,
+        hidden, permission, created_by,
+        updated_by, create_time, update_time
+        )
+        values (#{id,jdbcType=BIGINT}, #{pid,jdbcType=BIGINT}, #{subCount,jdbcType=INTEGER},
+        #{type,jdbcType=TINYINT}, #{title,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+        #{component,jdbcType=VARCHAR}, #{menuSort,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR},
+        #{path,jdbcType=VARCHAR}, #{target,jdbcType=BIT}, #{enabled,jdbcType=BIT}, #{keepAlive,jdbcType=BIT},
+        #{hidden,jdbcType=BIT}, #{permission,jdbcType=VARCHAR}, #{createdBy,jdbcType=BIGINT},
+        #{updatedBy,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.newland.mall.system.entity.SysMenu" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into sys_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="subCount != null">
+                sub_count,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="component != null">
+                component,
+            </if>
+            <if test="menuSort != null">
+                menu_sort,
+            </if>
+            <if test="icon != null">
+                icon,
+            </if>
+            <if test="path != null">
+                path,
+            </if>
+            <if test="target != null">
+                target,
+            </if>
+            <if test="enabled != null">
+                enabled,
+            </if>
+            <if test="keepAlive != null">
+                keep_alive,
+            </if>
+            <if test="hidden != null">
+                hidden,
+            </if>
+            <if test="permission != null">
+                permission,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="updatedBy != null">
+                updated_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=BIGINT},
+            </if>
+            <if test="subCount != null">
+                #{subCount,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=TINYINT},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="component != null">
+                #{component,jdbcType=VARCHAR},
+            </if>
+            <if test="menuSort != null">
+                #{menuSort,jdbcType=INTEGER},
+            </if>
+            <if test="icon != null">
+                #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="path != null">
+                #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="target != null">
+                #{target,jdbcType=BIT},
+            </if>
+            <if test="enabled != null">
+                #{enabled,jdbcType=BIT},
+            </if>
+            <if test="keepAlive != null">
+                #{keepAlive,jdbcType=BIT},
+            </if>
+            <if test="hidden != null">
+                #{hidden,jdbcType=BIT},
+            </if>
+            <if test="permission != null">
+                #{permission,jdbcType=VARCHAR},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy,jdbcType=BIGINT},
+            </if>
+            <if test="updatedBy != null">
+                #{updatedBy,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.newland.mall.system.entity.SysMenu">
+        update sys_menu
+        <set>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=BIGINT},
+            </if>
+            <if test="subCount != null">
+                sub_count = #{subCount,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=TINYINT},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="component != null">
+                component = #{component,jdbcType=VARCHAR},
+            </if>
+            <if test="menuSort != null">
+                menu_sort = #{menuSort,jdbcType=INTEGER},
+            </if>
+            <if test="icon != null">
+                icon = #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="path != null">
+                path = #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="target != null">
+                target = #{target,jdbcType=BIT},
+            </if>
+            <if test="enabled != null">
+                enabled = #{enabled,jdbcType=BIT},
+            </if>
+            <if test="keepAlive != null">
+                keep_alive = #{keepAlive,jdbcType=BIT},
+            </if>
+            <if test="hidden != null">
+                hidden = #{hidden,jdbcType=BIT},
+            </if>
+            <if test="permission != null">
+                permission = #{permission,jdbcType=VARCHAR},
+            </if>
+            <if test="createdBy != null">
+                created_by = #{createdBy,jdbcType=BIGINT},
+            </if>
+            <if test="updatedBy != null">
+                updated_by = #{updatedBy,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.newland.mall.system.entity.SysMenu">
+        update sys_menu
+        set pid = #{pid,jdbcType=BIGINT},
+        sub_count = #{subCount,jdbcType=INTEGER},
+        type = #{type,jdbcType=TINYINT},
+        title = #{title,jdbcType=VARCHAR},
+        name = #{name,jdbcType=VARCHAR},
+        component = #{component,jdbcType=VARCHAR},
+        menu_sort = #{menuSort,jdbcType=INTEGER},
+        icon = #{icon,jdbcType=VARCHAR},
+        path = #{path,jdbcType=VARCHAR},
+        target = #{target,jdbcType=BIT},
+        enabled = #{enabled,jdbcType=BIT},
+        keep_alive = #{keepAlive,jdbcType=BIT},
+        hidden = #{hidden,jdbcType=BIT},
+        permission = #{permission,jdbcType=VARCHAR},
+        created_by = #{createdBy,jdbcType=BIGINT},
+        updated_by = #{updatedBy,jdbcType=BIGINT},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="getPermissions" resultType="java.lang.String">
+        select t1.permission from sys_menu t1 left join sys_role_menu t2 on t1.id = t2.menu_id where t1.type=2 and
+        t2.role_id in
+        <foreach collection="roleIds" open="(" separator="," close=")" item="roleId">#{roleId}</foreach>
+    </select>
+    <select id="getMenuList" resultMap="BaseResultMap">
+        select t1.* from sys_menu t1 left join sys_role_menu t2 on t1.id = t2.menu_id where t1.enabled=1 and t2.role_id
+        in
+        <foreach collection="roleIds" open="(" separator="," close=")" item="roleId">#{roleId}</foreach>
+    </select>
+    <delete id="deleteBatchIds">
+        delete from sys_menu where id in
+        <foreach collection="ids" separator="," open="(" close=")" item="id">#{id}</foreach>
+    </delete>
+    <select id="selectBatchIds" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_menu where id in
+        <foreach collection="ids" separator="," open="(" close=")" item="id">#{id}</foreach>
+    </select>
+    <select id="selectBatchByPids" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_menu where pid in
+        <foreach collection="pids" separator="," open="(" close=")" item="pid">#{pid}</foreach>
+    </select>
+    <select id="selectSubMenuByPid" resultMap="BaseResultMap">
+        select * from sys_menu where
+        <choose>
+            <when test="pid == null || pid == 0">pid is null</when>
+            <otherwise>pid = #{pid}</otherwise>
+        </choose>
+        order by menu_sort asc
+    </select>
+    <select id="countDeptByPid" resultType="java.lang.Integer">
+        select count(1) from sys_menu where pid=#{pid}
+    </select>
+</mapper>

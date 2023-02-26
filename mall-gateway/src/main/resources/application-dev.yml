@@ -1,0 +1,75 @@
+server:
+  port: 88
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.100.100:31065
+        namespace: e5dfe71c-4579-4e22-bc7a-ac2e5ffab032
+      config:
+        enabled: false
+        import-check:
+          enabled: false
+    sentinel:
+      transport:
+        dashboard: 192.168.100.100:32329
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: mall-storage
+          uri: lb://mall-storage
+          predicates:
+            - Path=/storage/**
+          filters:
+            - RewritePath=/storage/(?<segment>/?.*),/$\{segment}
+        - id: auth-center
+          uri: lb://auth-center
+          predicates:
+            - Path=/uaa/**
+          filters:
+            - RewritePath=/uaa/(?<segment>/?.*),/$\{segment}
+        - id: system-service
+          uri: lb://system-service
+          predicates:
+            - Path=/system/**
+          filters:
+            - RewritePath=/system/(?<segment>/?.*),/$\{segment}
+        - id: mall-product
+          uri: lb://mall-product
+          predicates:
+            - Path=/pms/**
+          filters:
+            - RewritePath=/pms/(?<segment>/?.*),/$\{segment}
+        - id: mall-recommend
+          uri: lb://mall-recommend
+          predicates:
+            - Path=/sms/**
+          filters:
+            - RewritePath=/sms/(?<segment>/?.*),/$\{segment}
+        - id: mall-order
+          uri: lb://mall-order
+          predicates:
+            - Path=/oms/**
+          filters:
+            - RewritePath=/oms/(?<segment>/?.*),/$\{segment}
+  sleuth:
+    sampler:
+      probability: 1
+  config:
+    activate:
+      on-profile: dev
+  data:
+    redis:
+      host: 192.168.100.100
+      port: 31351
+      database: 0
+      password: liulun666
+      timeout: PT10S
+      lettuce:
+        pool:
+          max-active: 50
+          max-idle: 20
+          min-idle: 1
+          max-wait: PT10S

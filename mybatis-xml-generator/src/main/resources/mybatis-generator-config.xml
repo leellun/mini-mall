@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--mybatis的代码生成器相关配置-->
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 引入配置文件 -->
+    <properties resource="application.properties"/>
+    <context id="sys" targetRuntime="MyBatis3" defaultModelType="flat">
+        <!--生成mapper.xml时覆盖原文件-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <plugin type="com.mybatis.generator.core.ServiceAndControllerGeneratorPlugin">
+            <property name="targetProject" value="./src/main/java"/>
+            <property name="servicePackage" value="com.newland.mall.system.service"/>
+            <property name="serviceImplPackage" value="com.newland.mall.system.service.impl"/>
+            <property name="controllerPackage" value="com.newland.mall.system.controller"/>
+            <property name="superDaoInterface" value="com.newland.mybatis.mapper.BaseMapper"/>
+            <!--UserService,该值则为Service-->
+            <property name="serviceSuffix" value="Service"/>
+            <property name="author" value="leellun"/>
+            <property name="hasLombok" value="true"/>
+            <!--Service接口的父接口-->
+            <property name="superServiceInterface" value="com.newland.mybatis.service.IService"/>
+            <!--ServiceImpl的父类-->
+            <property name="superServiceImpl" value="com.newland.mybatis.service.impl.ServiceImpl"/>
+            <!--controller的父类接口-->
+            <!--            <property name="superController" value="com.newland.boot.commons.controller.GeneralCrudController"/>-->
+        </plugin>
+
+        <!-- 注释 -->
+        <commentGenerator>
+            <!-- 是否不生成注释 -->
+            <property name="suppressAllComments" value="true"/>
+            <!-- 不希望生成的注释中包含时间戳 -->
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+
+        <!-- jdbc连接 -->
+        <jdbcConnection driverClass="${spring.datasource.driver-class-name}"
+                        connectionURL="${mall.sys.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}">
+            <!-- 获取表注释 -->
+            <property name="useInformationSchema" value="true"/>
+            <!--高版本的 mysql-connector-java 需要设置 nullCatalogMeansCurrent=true 会影响useInformationSchema-->
+            <!--            <property name="nullCatalogMeansCurrent" value="true"/>-->
+        </jdbcConnection>
+
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <!--是否使用bigDecimal，默认false。
+                false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer
+                true，把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal-->
+            <property name="forceBigDecimals" value="true"/>
+            <!--默认false
+                false，将所有 JDBC 的时间类型解析为 java.util.Date
+                true，将 JDBC 的时间类型按如下规则解析
+                    DATE	                -> java.time.LocalDate
+                    TIME	                -> java.time.LocalTime
+                    TIMESTAMP               -> java.time.LocalDateTime
+                    TIME_WITH_TIMEZONE  	-> java.time.OffsetTime
+                    TIMESTAMP_WITH_TIMEZONE	-> java.time.OffsetDateTime
+                -->
+            <property name="useJSR310Types" value="true"/>
+        </javaTypeResolver>
+
+        <!-- 生成实体类地址 -->
+        <javaModelGenerator targetPackage="com.newland.mall.system.entity" targetProject="src/main/java">
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+
+        <sqlMapGenerator targetPackage="mapper/sys" targetProject="src/main/resources">
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="com.newland.mall.system.mapper" targetProject="src/main/java"
+                             type="XMLMAPPER">
+        </javaClientGenerator>
+
+        <table schema="" tableName="sys_user" domainObjectName="SysUser"
+               enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false" selectByExampleQueryId="false"></table>
+        <table schema="" tableName="sys_department" domainObjectName="SysDepartment"
+               enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false" selectByExampleQueryId="false"></table>
+        <table schema="" tableName="sys_job" domainObjectName="SysJob"
+               enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false" selectByExampleQueryId="false"></table>
+        <table schema="" tableName="sys_menu" domainObjectName="SysMenu"
+               enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false" selectByExampleQueryId="false"></table>
+        <table schema="" tableName="sys_role" domainObjectName="SysRole"
+               enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false" selectByExampleQueryId="false"></table>
+        <table schema="" tableName="sys_role_dept" domainObjectName="SysRoleDept"
+               enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false" selectByExampleQueryId="false"></table>
+        <table schema="" tableName="sys_role_menu" domainObjectName="SysRoleMenu"
+               enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false" selectByExampleQueryId="false"></table>
+        <table schema="" tableName="sys_user_role" domainObjectName="SysUserRole"
+               enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false" selectByExampleQueryId="false"></table>
+    </context>
+    <context id="ums" targetRuntime="MyBatis3" defaultModelType="flat">
+        <!--生成mapper.xml时覆盖原文件-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <plugin type="com.mybatis.generator.core.ServiceAndControllerGeneratorPlugin">
+            <property name="targetProject" value="./src/main/java"/>
+            <property name="servicePackage" value="com.newland.mall.member.service"/>
+            <property name="serviceImplPackage" value="com.newland.mall.member.service.impl"/>
+            <property name="controllerPackage" value="com.newland.mall.member.controller"/>
+            <property name="superDaoInterface" value="com.newland.mybatis.mapper.BaseMapper"/>
+            <!--UserService,该值则为Service-->
+            <property name="serviceSuffix" value="Service"/>
+            <property name="author" value="leellun"/>
+            <property name="hasLombok" value="true"/>
+            <!--Service接口的父接口-->
+            <property name="superServiceInterface" value="com.newland.mybatis.service.IService"/>
+            <!--ServiceImpl的父类-->
+            <property name="superServiceImpl" value="com.newland.mybatis.service.impl.ServiceImpl"/>
+            <!--controller的父类接口-->
+            <!--            <property name="superController" value="com.newland.boot.commons.controller.GeneralCrudController"/>-->
+        </plugin>
+
+        <!-- 注释 -->
+        <commentGenerator>
+            <!-- 是否不生成注释 -->
+            <property name="suppressAllComments" value="true"/>
+            <!-- 不希望生成的注释中包含时间戳 -->
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+
+        <!-- jdbc连接 -->
+        <jdbcConnection driverClass="${spring.datasource.driver-class-name}"
+                        connectionURL="${mall.ums.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}">
+            <!-- 获取表注释 -->
+            <property name="useInformationSchema" value="true"/>
+            <!--高版本的 mysql-connector-java 需要设置 nullCatalogMeansCurrent=true 会影响useInformationSchema-->
+            <!--            <property name="nullCatalogMeansCurrent" value="true"/>-->
+        </jdbcConnection>
+
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <!--是否使用bigDecimal，默认false。
+                false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer
+                true，把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal-->
+            <property name="forceBigDecimals" value="true"/>
+            <!--默认false
+                false，将所有 JDBC 的时间类型解析为 java.util.Date
+                true，将 JDBC 的时间类型按如下规则解析
+                    DATE	                -> java.time.LocalDate
+                    TIME	                -> java.time.LocalTime
+                    TIMESTAMP               -> java.time.LocalDateTime
+                    TIME_WITH_TIMEZONE  	-> java.time.OffsetTime
+                    TIMESTAMP_WITH_TIMEZONE	-> java.time.OffsetDateTime
+                -->
+            <property name="useJSR310Types" value="true"/>
+        </javaTypeResolver>
+
+        <!-- 生成实体类地址 -->
+        <javaModelGenerator targetPackage="com.newland.mall.member.entity" targetProject="src/main/java">
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+
+        <sqlMapGenerator targetPackage="mapper/member" targetProject="src/main/resources">
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="com.newland.mall.member.mapper" targetProject="src/main/java"
+                             type="XMLMAPPER">
+        </javaClientGenerator>
+
+        <table schema="" tableName="ums_user" domainObjectName="User"
+               enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false" selectByExampleQueryId="false"></table>
+    </context>
+    <context id="cart" targetRuntime="MyBatis3" defaultModelType="flat">
+        <!--生成mapper.xml时覆盖原文件-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <plugin type="com.mybatis.generator.core.ServiceAndControllerGeneratorPlugin">
+            <property name="targetProject" value="./src/main/java"/>
+            <property name="servicePackage" value="com.newland.mall.cart.service"/>
+            <property name="serviceImplPackage" value="com.newland.mall.cart.service.impl"/>
+            <property name="controllerPackage" value="com.newland.mall.cart.controller"/>
+            <property name="superDaoInterface" value="com.newland.mybatis.mapper.BaseMapper"/>
+            <!--UserService,该值则为Service-->
+            <property name="serviceSuffix" value="Service"/>
+            <property name="author" value="leellun"/>
+            <property name="hasLombok" value="true"/>
+            <!--Service接口的父接口-->
+            <property name="superServiceInterface" value="com.newland.mybatis.service.IService"/>
+            <!--ServiceImpl的父类-->
+            <property name="superServiceImpl" value="com.newland.mybatis.service.impl.ServiceImpl"/>
+            <!--controller的父类接口-->
+            <!--            <property name="superController" value="com.newland.boot.commons.controller.GeneralCrudController"/>-->
+        </plugin>
+
+        <!-- 注释 -->
+        <commentGenerator>
+            <!-- 是否不生成注释 -->
+            <property name="suppressAllComments" value="true"/>
+            <!-- 不希望生成的注释中包含时间戳 -->
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+
+        <!-- jdbc连接 -->
+        <jdbcConnection driverClass="${spring.datasource.driver-class-name}"
+                        connectionURL="${mall.ums.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}">
+            <!-- 获取表注释 -->
+            <property name="useInformationSchema" value="true"/>
+            <!--高版本的 mysql-connector-java 需要设置 nullCatalogMeansCurrent=true 会影响useInformationSchema-->
+            <!--            <property name="nullCatalogMeansCurrent" value="true"/>-->
+        </jdbcConnection>
+
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <!--是否使用bigDecimal，默认false。
+                false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer
+                true，把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal-->
+            <property name="forceBigDecimals" value="true"/>
+            <!--默认false
+                false，将所有 JDBC 的时间类型解析为 java.util.Date
+                true，将 JDBC 的时间类型按如下规则解析
+                    DATE	                -> java.time.LocalDate
+                    TIME	                -> java.time.LocalTime
+                    TIMESTAMP               -> java.time.LocalDateTime
+                    TIME_WITH_TIMEZONE  	-> java.time.OffsetTime
+                    TIMESTAMP_WITH_TIMEZONE	-> java.time.OffsetDateTime
+                -->
+            <property name="useJSR310Types" value="true"/>
+        </javaTypeResolver>
+
+        <!-- 生成实体类地址 -->
+        <javaModelGenerator targetPackage="com.newland.mall.cart.entity" targetProject="src/main/java">
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+
+        <sqlMapGenerator targetPackage="mapper/cart" targetProject="src/main/resources">
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="com.newland.mall.cart.mapper" targetProject="src/main/java"
+                             type="XMLMAPPER">
+        </javaClientGenerator>
+
+        <table schema="" tableName="cart_item" domainObjectName="CartItem"
+               enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false" selectByExampleQueryId="false"></table>
+    </context>
+    <context id="pms" targetRuntime="MyBatis3" defaultModelType="flat">
+        <!--生成mapper.xml时覆盖原文件-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <plugin type="com.mybatis.generator.core.ServiceAndControllerGeneratorPlugin">
+            <property name="targetProject" value="./src/main/java"/>
+            <property name="superDaoInterface" value="com.newland.mybatis.mapper.BaseMapper"/>
+            <property name="servicePackage" value="com.newland.mall.product.service"/>
+            <property name="serviceImplPackage" value="com.newland.mall.product.service.impl"/>
+            <property name="controllerPackage" value="com.newland.mall.product.controller"/>
+            <!--UserService,该值则为Service-->
+            <property name="serviceSuffix" value="Service"/>
+            <property name="author" value="leellun"/>
+            <property name="hasLombok" value="true"/>
+            <!--Service接口的父接口-->
+            <property name="superServiceInterface" value="com.newland.mybatis.service.IService"/>
+            <!--ServiceImpl的父类-->
+            <property name="superServiceImpl" value="com.newland.mybatis.service.impl.ServiceImpl"/>
+        </plugin>
+
+        <!-- 注释 -->
+        <commentGenerator>
+            <!-- 是否不生成注释 -->
+            <property name="suppressAllComments" value="true"/>
+            <!-- 不希望生成的注释中包含时间戳 -->
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+
+        <!-- jdbc连接 -->
+        <jdbcConnection driverClass="${spring.datasource.driver-class-name}"
+                        connectionURL="${mall.pms.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}">
+            <!-- 获取表注释 -->
+            <property name="useInformationSchema" value="true"/>
+        </jdbcConnection>
+
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="true"/>
+            <property name="useJSR310Types" value="true"/>
+        </javaTypeResolver>
+
+        <!-- 生成实体类地址 -->
+        <javaModelGenerator targetPackage="com.newland.mall.product.entity" targetProject="src/main/java">
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+
+        <sqlMapGenerator targetPackage="mapper/product" targetProject="src/main/resources">
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="com.newland.mall.product.mapper" targetProject="src/main/java"
+                             type="XMLMAPPER">
+        </javaClientGenerator>
+
+        <table schema="" tableName="pms_product" domainObjectName="Product"
+               enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false" selectByExampleQueryId="false"></table>
+        <table schema="" tableName="pms_product_category" domainObjectName="ProductCategory"
+               enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false" selectByExampleQueryId="false"></table>
+    </context>
+    <context id="sms" targetRuntime="MyBatis3" defaultModelType="flat">
+        <!--生成mapper.xml时覆盖原文件-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <plugin type="com.mybatis.generator.core.ServiceAndControllerGeneratorPlugin">
+            <property name="targetProject" value="./src/main/java"/>
+            <property name="superDaoInterface" value="com.newland.mybatis.mapper.BaseMapper"/>
+            <property name="servicePackage" value="com.newland.mall.recommend.service"/>
+            <property name="serviceImplPackage" value="com.newland.mall.recommend.service.impl"/>
+            <property name="controllerPackage" value="com.newland.mall.recommend.controller"/>
+            <!--UserService,该值则为Service-->
+            <property name="serviceSuffix" value="Service"/>
+            <property name="author" value="leellun"/>
+            <property name="hasLombok" value="true"/>
+            <!--Service接口的父接口-->
+            <property name="superServiceInterface" value="com.newland.mybatis.service.IService"/>
+            <!--ServiceImpl的父类-->
+            <property name="superServiceImpl" value="com.newland.mybatis.service.impl.ServiceImpl"/>
+        </plugin>
+
+        <!-- 注释 -->
+        <commentGenerator>
+            <!-- 是否不生成注释 -->
+            <property name="suppressAllComments" value="true"/>
+            <!-- 不希望生成的注释中包含时间戳 -->
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+
+        <!-- jdbc连接 -->
+        <jdbcConnection driverClass="${spring.datasource.driver-class-name}"
+                        connectionURL="${mall.sms.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}">
+            <!-- 获取表注释 -->
+            <property name="useInformationSchema" value="true"/>
+        </jdbcConnection>
+
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="true"/>
+            <property name="useJSR310Types" value="true"/>
+        </javaTypeResolver>
+
+        <!-- 生成实体类地址 -->
+        <javaModelGenerator targetPackage="com.newland.mall.recommend.entity" targetProject="src/main/java">
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+
+        <sqlMapGenerator targetPackage="mapper/recommend" targetProject="src/main/resources">
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="com.newland.mall.recommend.mapper" targetProject="src/main/java"
+                             type="XMLMAPPER">
+        </javaClientGenerator>
+
+        <table schema="" tableName="sms_carousel" domainObjectName="Carousel"
+               enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false" selectByExampleQueryId="false"></table>
+        <table schema="" tableName="sms_index_config" domainObjectName="IndexConfig"
+               enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false" selectByExampleQueryId="false"></table>
+    </context>
+    <context id="oms" targetRuntime="MyBatis3" defaultModelType="flat">
+        <!--生成mapper.xml时覆盖原文件-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <plugin type="com.mybatis.generator.core.ServiceAndControllerGeneratorPlugin">
+            <property name="targetProject" value="./src/main/java"/>
+            <property name="superDaoInterface" value="com.newland.mybatis.mapper.BaseMapper"/>
+            <property name="servicePackage" value="com.newland.mall.order.service"/>
+            <property name="serviceImplPackage" value="com.newland.mall.order.service.impl"/>
+            <property name="controllerPackage" value="com.newland.mall.order.controller"/>
+            <!--UserService,该值则为Service-->
+            <property name="serviceSuffix" value="Service"/>
+            <property name="author" value="leellun"/>
+            <property name="hasLombok" value="true"/>
+            <!--Service接口的父接口-->
+            <property name="superServiceInterface" value="com.newland.mybatis.service.IService"/>
+            <!--ServiceImpl的父类-->
+            <property name="superServiceImpl" value="com.newland.mybatis.service.impl.ServiceImpl"/>
+        </plugin>
+
+        <!-- 注释 -->
+        <commentGenerator>
+            <!-- 是否不生成注释 -->
+            <property name="suppressAllComments" value="true"/>
+            <!-- 不希望生成的注释中包含时间戳 -->
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+
+        <!-- jdbc连接 -->
+        <jdbcConnection driverClass="${spring.datasource.driver-class-name}"
+                        connectionURL="${mall.order.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}">
+            <!-- 获取表注释 -->
+            <property name="useInformationSchema" value="true"/>
+        </jdbcConnection>
+
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="true"/>
+            <property name="useJSR310Types" value="true"/>
+        </javaTypeResolver>
+
+        <!-- 生成实体类地址 -->
+        <javaModelGenerator targetPackage="com.newland.mall.order.entity" targetProject="src/main/java">
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+
+        <sqlMapGenerator targetPackage="mapper/order" targetProject="src/main/resources">
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="com.newland.mall.order.mapper" targetProject="src/main/java"
+                             type="XMLMAPPER">
+        </javaClientGenerator>
+
+        <table schema="" tableName="oms_order" domainObjectName="Order"
+               enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false" selectByExampleQueryId="false"></table>
+        <table schema="" tableName="oms_order_item" domainObjectName="OrderItem"
+               enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false" selectByExampleQueryId="false"></table>
+        <table schema="" tableName="oms_order_address" domainObjectName="OrderAddress"
+               enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false" selectByExampleQueryId="false"></table>
+        <table schema="" tableName="oms_user_address" domainObjectName="UserAddress"
+               enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false" selectByExampleQueryId="false"></table>
+    </context>
+</generatorConfiguration>
